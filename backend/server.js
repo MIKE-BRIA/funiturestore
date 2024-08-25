@@ -130,6 +130,7 @@ import CartRoutes from "./routes/cart.routes.js";
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
 import { fileURLToPath } from "url";
+import helmet from "helmet";
 
 // Load environment variables
 dotenv.config();
@@ -152,6 +153,18 @@ cloudinary.config({
 // Get the current file path and directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com"],
+      },
+    },
+  })
+);
 
 //! Middlewares
 app.use(express.json({ limit: "50mb" }));
