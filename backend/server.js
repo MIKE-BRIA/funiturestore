@@ -167,7 +167,7 @@ app.use("/api/cart", CartRoutes);
 //! Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static(path.join(__dirname, "frontend/dist")));
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   // Serve the React app for any route not covered by the API
   app.get("*", (req, res) => {
