@@ -43,6 +43,12 @@ const MainNavigation = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user-threads");
+
+    navigate("/login");
+  };
+
   return (
     <main>
       <section className="flex justify-between maxWidth-large bg-slate-200 p-5">
@@ -99,9 +105,15 @@ const MainNavigation = () => {
               <IoIosCart size={24} color="black" />
             </button>
           </Link>
-          <Link to={"/login"}>
-            <button className="text-white">login</button>
-          </Link>
+          {!loading && userDetails ? (
+            <button className="text-white" onClick={handleLogout}>
+              logout
+            </button>
+          ) : (
+            <Link to="/login">
+              <button>login</button>
+            </Link>
+          )}
         </div>
       </section>
     </main>
