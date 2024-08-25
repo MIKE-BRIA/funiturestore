@@ -130,6 +130,7 @@ import CartRoutes from "./routes/cart.routes.js";
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from "cors";
 
 // Load environment variables
 dotenv.config();
