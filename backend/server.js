@@ -137,6 +137,11 @@ dotenv.config();
 // Connect to MongoDB
 mongooseConnect();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://funiturestore.onrender.com/",
+];
+
 const app = express();
 
 // Set the port
@@ -150,8 +155,22 @@ cloudinary.config({
 });
 
 // Get the current file path and directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 //! Middlewares
 app.use(express.json({ limit: "50mb" }));
