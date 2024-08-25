@@ -9,7 +9,7 @@ const useAuth = () => {
       setIsAuthenticated(!!user);
     };
 
-    // Check authentication on mount
+    // Check authentication status on mount
     checkAuth();
 
     // Set up a listener to check authentication status when localStorage changes

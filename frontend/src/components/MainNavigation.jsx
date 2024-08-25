@@ -99,6 +99,9 @@ const MainNavigation = () => {
               <IoIosCart size={24} color="black" />
             </button>
           </Link>
+          <Link to={"/login"}>
+            <button className="text-white">login</button>
+          </Link>
         </div>
       </section>
     </main>
