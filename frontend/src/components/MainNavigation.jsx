@@ -45,8 +45,8 @@ const MainNavigation = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user-threads");
-
-    navigate("/login");
+    window.location.reload();
+    navigate("/");
   };
 
   return (
