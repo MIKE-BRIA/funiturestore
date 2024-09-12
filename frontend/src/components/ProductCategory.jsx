@@ -25,7 +25,7 @@ const ProductCategory = () => {
       <h1 className="p-6 text-center">Products in {category}</h1>
       <div>
         {!loading && (
-          <div className="grid grid-cols-4 gap-4 mx-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-4">
             {filteredProducts.map((product) => (
               <Link
                 key={product._id}

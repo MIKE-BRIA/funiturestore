@@ -38,6 +38,10 @@ const UserOrders = () => {
     }
   };
 
+  if (!purchases) {
+    return <div>No Purchases made yet</div>;
+  }
+
   return (
     <div>
       {loading ? (

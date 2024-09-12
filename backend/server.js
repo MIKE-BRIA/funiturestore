@@ -8,7 +8,6 @@ import PurchasesRoutes from "./routes/purchases.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 

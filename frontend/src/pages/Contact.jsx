@@ -22,15 +22,15 @@ const Contact = () => {
 
       <div className="border-b p-6 border-blue-500">
         <h1 className="text-center mt-10 mb-4">Get In Touch With Us</h1>
-        <p className="text-center w-96 m-auto text-xl">
+        <p className="text-center w-full md:w-96 m-auto text-xl">
           For more information about our products and services, Please fee free
           to drop us an email. Our staff always be there to help you out.Do not
           hesitate
         </p>
       </div>
 
-      <div className="flex p-6 gap-10 justify-center items-center">
-        <div className="flex flex-col gap-10 ">
+      <div className="flex flex-col md:flex-row p-2 md:p-6 gap-6 md:gap-10 justify-center items-center">
+        <div className="flex flex-col  gap-4 md:gap-10 ">
           <div>
             <h1>Address</h1>
             <p>236 5th SE Avenue, New York</p>
@@ -47,7 +47,7 @@ const Contact = () => {
             <p>Saturday-Sunday: 9:00-21:00</p>
           </div>
         </div>
-        <div>
+        <div className="border border-white p-4 rounded-xl">
           <form action="">
             <InputArea title="Your name" placeholder={"Abc"} />
             <InputArea title="Email" placeholder="Abc@del.com" />
@@ -70,7 +70,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex justify-between mx-10 my-10">
+      <div className="grid grid-cols-2 gap-6 md:flex justify-between mx-2 md:mx-10 my-10">
         <section className="flex gap-2">
           <GiTrophyCup size={50} />
           <div>

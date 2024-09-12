@@ -14,7 +14,7 @@ const UserProfile = () => {
   const { userDetails } = useUserDetails();
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-3 md:p-6">
       {/* Header Section */}
       <div className="flex items-center gap-4 mb-6">
         <img
@@ -34,6 +34,7 @@ const UserProfile = () => {
       </div>
 
       {/* Tabs for Navigation */}
+
       <div className="flex justify-between mb-6">
         <button
           onClick={() => setActiveTab("overview")}
@@ -43,7 +44,7 @@ const UserProfile = () => {
               : "text-gray-600"
           }`}
         >
-          <FaUserEdit /> Overview
+          <FaUserEdit className="text-sm sm:text-base" /> Overview
         </button>
         <button
           onClick={() => setActiveTab("orders")}
@@ -53,7 +54,7 @@ const UserProfile = () => {
               : "text-gray-600"
           }`}
         >
-          <HiOutlineClipboardList /> Orders
+          <HiOutlineClipboardList className="text-sm sm:text-base" /> Orders
         </button>
         <button
           onClick={() => setActiveTab("saved")}
@@ -63,7 +64,7 @@ const UserProfile = () => {
               : "text-gray-600"
           }`}
         >
-          <AiOutlineHeart /> Saved Items
+          <AiOutlineHeart className="text-sm sm:text-base" /> Saved
         </button>
         <button
           onClick={() => setActiveTab("settings")}
@@ -73,7 +74,7 @@ const UserProfile = () => {
               : "text-gray-600"
           }`}
         >
-          <CiSettings /> Settings
+          <CiSettings className="text-sm sm:text-base" /> Settings
         </button>
       </div>
 
@@ -99,7 +100,7 @@ const UserProfile = () => {
         {activeTab === "saved" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Saved Items</h2>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4">
               <div className="border p-4 rounded">
                 <img
                   src="/product1.jpg"

@@ -19,7 +19,7 @@ const OverView = ({ setActiveTab }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex flex-col md:grid grid-cols-2 gap-3 md:gap-4">
       <div className="bg-gray-300 border border-red-200">
         <h2 className="p-4 border border-b-red-200">ACCOUNT DETAILS</h2>
         <div className="p-4">

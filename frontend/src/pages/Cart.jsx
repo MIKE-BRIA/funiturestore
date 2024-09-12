@@ -40,12 +40,11 @@ const Cart = () => {
             Finish Your Shopping By Checking out
           </p>
         </div>
-        <div className="flex mt-4 gap-4 p-6 mx-8">
-          <div className="w-3/5">
-            {/* Optionally, you can add a check here to ensure cartItems is populated */}
+        <div className="flex flex-col md:flex-row mt-4 gap-4 p-6 mx-1 md:mx-8">
+          <div className="w-full md:w-3/5">
             <CartItems />
           </div>
-          <div className="w-2/5">
+          <div className="w-full md:w-2/5">
             <div className="w-full">
               <Checkout />
             </div>

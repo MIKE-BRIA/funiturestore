@@ -18,19 +18,24 @@ const Home = () => {
       <div className="relative">
         <img
           src="/images/housebadge.jpg"
-          className="w-full object-cover"
+          className="w-full object-cover h-96 md:h-[500px]"
           alt="House Badge"
-          style={{ height: "500px" }}
         />
-        <div className="absolute top-28 right-28 w-96 m-4 p-4 bg-white bg-opacity-80 rounded shadow-lg">
-          <p className="font-mono text-black">NEW ARRIVAL</p>
-          <h1 className="my-3 text-yellow-600">Discover our New Collection</h1>
-          <p className="my-3 text-lg font-medium text-black">
+        <div className="absolute top-1/4 right-0 md:right-28 md:top-28 w-full md:w-96 m-4 p-4 bg-white bg-opacity-80 rounded shadow-lg">
+          <p className="font-mono text-black text-center md:text-left text-sm md:text-base">
+            NEW ARRIVAL
+          </p>
+          <h1 className="my-3 text-yellow-600 text-center md:text-left text-lg md:text-2xl">
+            Discover our New Collection
+          </h1>
+          <p className="my-3 text-sm md:text-lg font-medium text-black text-center md:text-left">
             Do shopping for your house furniture and if you are not able to
-            style your home we are willing to be your interior designers
+            style your home we are willing to be your interior designers.
           </p>
           <Link to="/shop">
-            <button className="btn-primary">Shop with us</button>
+            <button className="btn-primary w-full md:w-auto">
+              Shop with us
+            </button>
           </Link>
         </div>
       </div>
@@ -41,7 +46,7 @@ const Home = () => {
             Choose from a selection of our products for your house or office
           </p>
         </div>
-        <div className="flex gap-2 mx-14">
+        <div className="grid grid-cols-2 md:flex gap-1 md:gap-4 mx-2 md:mx-14">
           <Link to={`shop/dining`} className="flex-1">
             <RangeCard source={"images/dining.jpg"} title={"Dining"} />
           </Link>
@@ -70,7 +75,7 @@ const Home = () => {
         )}
         {error && <p className="text-center text-red-500">Error: {error}</p>}
         {!loading && !error && (
-          <div className="grid grid-cols-4 gap-4 mx-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 mx-4">
             {displayedProducts.map((product) => (
               <Link
                 key={product._id}
