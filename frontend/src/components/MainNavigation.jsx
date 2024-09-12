@@ -94,11 +94,11 @@ const MainNavigation = () => {
             >
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search products, brands and category"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 ref={searchInputRef}
-                className="p-2 pl-10 w-full border border-gray-300 rounded"
+                className="p-2 pl-10 w-full border border-gray-300 rounded-xl"
               />
               <button
                 type="submit"

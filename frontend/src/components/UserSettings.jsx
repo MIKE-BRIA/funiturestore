@@ -85,7 +85,7 @@ const UserSettings = ({ setActiveTab }) => {
   return (
     <>
       <div>
-        <div className="flex p-4 gap-6">
+        <div className="flex flex-col md:flex-row p-4 gap-6">
           <div className="flex-1">
             <form onSubmit={handleSubmit}>
               <InputArea

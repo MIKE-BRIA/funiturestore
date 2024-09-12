@@ -56,7 +56,7 @@ const CartItems = () => {
                   alt="product image"
                   className="w-20 h-20 object-cover"
                 />
-                <p>{cart.name}</p>
+                <p className="text-sm md:text-lg">{cart.name}</p>
               </div>
 
               <div>
@@ -71,7 +71,7 @@ const CartItems = () => {
             </div>
             <div className="flex flex-col justify-between">
               <div>
-                <p className="text-xl">
+                <p className="text-sm md:text-xl">
                   {formatCurrency(Number(cart.totalPrice), "en-US", "EUR")}
                 </p>
               </div>

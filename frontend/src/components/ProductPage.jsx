@@ -80,7 +80,7 @@ const ProductPage = () => {
 
   return (
     <div>
-      <div className="flex gap-6 h-96 mb-12 w-full p-6 bg-gray-100 rounded-lg shadow-lg">
+      <div className="flex flex-col md:flex-row gap-6 h-full md:h-96 mb-12 w-full p-6 bg-gray-100 rounded-lg shadow-lg">
         <div className="flex-1">
           <img
             src={product.img}
@@ -101,7 +101,7 @@ const ProductPage = () => {
             </p>
             <p className="text-base text-gray-600">{product.description}</p>
           </div>
-          <div className="flex gap-8">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-8">
             <button className="mt-4 flex-1 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
               Add to favourite
             </button>
@@ -135,7 +135,7 @@ const ProductPage = () => {
             </div>
           )}
           {!loading && !error && (
-            <div className="grid grid-cols-4 gap-4 mx-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 mx-4">
               {displayedProducts.map((product) => (
                 <Link
                   key={product._id}
