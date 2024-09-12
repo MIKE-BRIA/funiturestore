@@ -62,6 +62,23 @@ export const saveCartItem = createAsyncThunk(
   }
 );
 
+export const deleteitem = createAsyncThunk(
+  "cart/deleteItem",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`/api/cart/removecart/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete cart item");
+
+      return id; // Return the ID of the deleted item
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -105,17 +122,17 @@ const cartSlice = createSlice({
         }
       }
     },
-    deleteItem(state, action) {
-      const id = action.payload;
-      const existingItem = state.cartItems.find((item) => item.id === id);
+    // deleteItem(state, action) {
+    //   const id = action.payload;
+    //   const existingItem = state.cartItems.find((item) => item.id === id);
 
-      if (existingItem) {
-        state.totalQuantity -= existingItem.quantity;
-        state.totalAmount -= existingItem.totalPrice;
+    //   if (existingItem) {
+    //     state.totalQuantity -= existingItem.quantity;
+    //     state.totalAmount -= existingItem.totalPrice;
 
-        state.cartItems = state.cartItems.filter((item) => item.id !== id);
-      }
-    },
+    //     state.cartItems = state.cartItems.filter((item) => item.id !== id);
+    //   }
+    // },
     updateCartItemQuantity(state, action) {
       const { id, quantity } = action.payload;
       const existingItem = state.cartItems.find((item) => item.id === id);
@@ -169,6 +186,21 @@ const cartSlice = createSlice({
             0
           );
         }
+      })
+      .addCase(deleteitem.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.cartItems = state.cartItems.filter((item) => item.id !== id);
+        state.totalQuantity = state.cartItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+        state.totalAmount = state.cartItems.reduce(
+          (total, item) => total + item.totalPrice,
+          0
+        );
+      })
+      .addCase(deleteitem.rejected, (state, action) => {
+        console.error("Failed to delete cart item:", action.payload);
       });
   },
 });
