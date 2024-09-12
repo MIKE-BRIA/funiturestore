@@ -68,3 +68,37 @@ export async function updatecartdata(req, res) {
     return res.status(500).json({ error: error.message });
   }
 }
+
+export async function removeCartProduct(req, res) {
+  try {
+    const { cartId } = req.params;
+
+    const product = await Cart.findById(cartId);
+
+    if (!product) return res.status(404).json({ error: "product not found" });
+
+    await Cart.findByIdAndDelete(cartId);
+
+    res.status(200).json({ message: "Cart product deleted successfully" });
+  } catch (error) {
+    console.log("error in removeCartProduct: ", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function getcartProduct(req, res) {
+  try {
+    const { productId } = req.params;
+
+    const product = await Cart.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product found", product });
+  } catch (error) {
+    console.log("Error in getcartProduct: ", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+}
