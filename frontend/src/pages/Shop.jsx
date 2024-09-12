@@ -40,7 +40,7 @@ const Shop = () => {
         )}
         {error && <p className="text-center text-red-500">Error: {error}</p>}
         {!loading && !error && (
-          <div className="grid grid-cols-4 gap-4 mx-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 mx-4">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <Link
