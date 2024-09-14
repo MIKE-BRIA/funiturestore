@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash, FaMinus } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import {
-  removeItemFromCart,
+  // removeItemFromCart,
   updateCartData,
   deleteitem,
 } from "../store/slices/cartSlice";
@@ -20,6 +20,7 @@ const CartItems = () => {
   };
 
   const handleIncrement = (item) => {
+    // console.log("updatedid", item._id);
     const newQuantity = item.quantity + 1;
     dispatch(updateCartData({ cartItemId: item._id, quantity: newQuantity }));
   };
@@ -29,13 +30,12 @@ const CartItems = () => {
       const newQuantity = item.quantity - 1;
       dispatch(updateCartData({ cartItemId: item._id, quantity: newQuantity }));
     } else {
-      dispatch(removeItemFromCart(item._id));
+      dispatch(deleteitem(item._id));
     }
   };
 
   const handleDelete = (id) => {
     dispatch(deleteitem(id));
-    // window.location.reload();
   };
 
   return (

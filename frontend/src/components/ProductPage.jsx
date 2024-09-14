@@ -56,6 +56,13 @@ const ProductPage = () => {
       showToast("Please login to add item to cart");
       return;
     }
+
+    const userString = localStorage.getItem("user-threads");
+
+    if (!userString) {
+      showToast("please login to add item to cart");
+    }
+
     const item = {
       productId: product._id,
       name: product.name,
@@ -71,10 +78,10 @@ const ProductPage = () => {
         name: product.name,
         price: product.price,
         img: product.img,
-      }),
-
-      dispatch(saveCartItem(item))
+      })
     );
+
+    dispatch(saveCartItem(item));
     showToast("Item added to cart successfully");
   };
 
