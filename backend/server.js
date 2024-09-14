@@ -8,12 +8,14 @@ import PurchasesRoutes from "./routes/purchases.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
 mongooseConnect();
 
 const app = express();
+app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 const __dirname = path.resolve();
 
