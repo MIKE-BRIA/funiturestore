@@ -32,7 +32,10 @@ export const updateCartData = createAsyncThunk(
         body: JSON.stringify({ cartItemId, quantity }),
       });
 
-      if (!res.ok) throw new Error("Failed to update cart Item");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to update cart item");
+      }
 
       const data = await res.json();
       return data.cartItem;
@@ -72,7 +75,8 @@ export const deleteitem = createAsyncThunk(
 
       if (!res.ok) throw new Error("Failed to delete cart item");
 
-      return id; // Return the ID of the deleted item
+      // console.log("Deleted item ID:", id);
+      return id;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -108,14 +112,14 @@ const cartSlice = createSlice({
     },
     removeItemFromCart(state, action) {
       const id = action.payload;
-      const existingItem = state.cartItems.find((item) => item.id === id);
+      const existingItem = state.cartItems.find((item) => item._id === id);
 
       if (existingItem) {
         state.totalQuantity--;
         state.totalAmount -= existingItem.price;
 
         if (existingItem.quantity === 1) {
-          state.cartItems = state.cartItems.filter((item) => item.id !== id);
+          state.cartItems = state.cartItems.filter((item) => item._id !== id);
         } else {
           existingItem.quantity--;
           existingItem.totalPrice -= existingItem.price;
@@ -135,7 +139,7 @@ const cartSlice = createSlice({
     // },
     updateCartItemQuantity(state, action) {
       const { id, quantity } = action.payload;
-      const existingItem = state.cartItems.find((item) => item.id === id);
+      const existingItem = state.cartItems.find((item) => item._id === id);
 
       if (existingItem) {
         state.totalQuantity += quantity - existingItem.quantity;
@@ -170,8 +174,9 @@ const cartSlice = createSlice({
       })
       .addCase(updateCartData.fulfilled, (state, action) => {
         const updatedItem = action.payload;
+        // console.log("updateditemsss", updatedItem);
         const existingItem = state.cartItems.find(
-          (item) => item.id === updatedItem.id
+          (item) => item._id === updatedItem._id
         );
 
         if (existingItem) {
@@ -189,7 +194,9 @@ const cartSlice = createSlice({
       })
       .addCase(deleteitem.fulfilled, (state, action) => {
         const id = action.payload;
-        state.cartItems = state.cartItems.filter((item) => item.id !== id);
+        // console.log("Reducer received delete item ID:", id);
+
+        state.cartItems = state.cartItems.filter((item) => item._id !== id);
         state.totalQuantity = state.cartItems.reduce(
           (total, item) => total + item.quantity,
           0
@@ -198,6 +205,8 @@ const cartSlice = createSlice({
           (total, item) => total + item.totalPrice,
           0
         );
+
+        // console.log("Updated cartItems:", state.cartItems);
       })
       .addCase(deleteitem.rejected, (state, action) => {
         console.error("Failed to delete cart item:", action.payload);
