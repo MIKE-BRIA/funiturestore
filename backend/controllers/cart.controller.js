@@ -80,20 +80,21 @@ export async function updatecartdata(req, res) {
 
 export async function removeItemFromCart(req, res) {
   try {
-    const { cartId } = req.params;
+    const { userId } = req.params;
 
-    if (!cartId)
-      return res.status(404).json({ error: "CartID does not exist" });
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
 
-    const CartItem = await Cart.findById(cartId);
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
 
-    if (!CartItem) return res.status(404).json({ error: "Item not found" });
+    await Favourite.deleteMany({ user: userId });
 
-    await Cart.findByIdAndDelete(cartId);
-
-    res.status(200).json({ message: "Cart item deleted successfully" });
+    res.status(200).json({ message: "All favourites cleared successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
-    console.log("error in removeItemFromCart: ", error.message);
+    console.log("Error clearing favourites", error);
   }
 }
