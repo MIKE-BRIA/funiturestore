@@ -8,10 +8,22 @@ import OverView from "./OverView";
 import UserSettings from "./UserSettings";
 import useUserDetails from "../hooks/useUserDetails";
 import UserOrders from "./UserOrders";
+import UserSaved from "./UserSaved";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getFavourites } from "../store/slices/favouriteSlice";
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const { userDetails } = useUserDetails();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userDetails) {
+      const userId = userDetails._id;
+      dispatch(getFavourites(userId));
+    }
+  }, [userDetails, dispatch]);
 
   return (
     <div className="container mx-auto p-3 md:p-6">
@@ -100,26 +112,7 @@ const UserProfile = () => {
         {activeTab === "saved" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Saved Items</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4">
-              <div className="border p-4 rounded">
-                <img
-                  src="/product1.jpg"
-                  alt="Product 1"
-                  className="w-full h-40 object-cover mb-2"
-                />
-                <p className="font-semibold">Product Name 1</p>
-                <p>$50.00</p>
-              </div>
-              <div className="border p-4 rounded">
-                <img
-                  src="/product2.jpg"
-                  alt="Product 2"
-                  className="w-full h-40 object-cover mb-2"
-                />
-                <p className="font-semibold">Product Name 2</p>
-                <p>$30.00</p>
-              </div>
-            </div>
+            <UserSaved />
           </div>
         )}
 

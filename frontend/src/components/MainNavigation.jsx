@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { RiAccountPinCircleLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci";
 import { IoIosCart } from "react-icons/io";
 import useUserDetails from "../hooks/useUserDetails";
 import { HiMenu } from "react-icons/hi";
@@ -112,9 +112,9 @@ const MainNavigation = () => {
               <CiSearch size={24} color="black" />
             </button>
           )}
-          <button>
+          {/* <button>
             <CiHeart size={24} color="black" />
-          </button>
+          </button> */}
           <Link to="/cart">
             <button>
               <IoIosCart size={24} color="black" />

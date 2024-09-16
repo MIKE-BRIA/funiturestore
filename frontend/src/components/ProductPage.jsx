@@ -6,15 +6,19 @@ import { Link } from "react-router-dom";
 import ProductCard from "./productCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, saveCartItem } from "../store/slices/cartSlice";
-import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 import useUserDetails from "../hooks/useUserDetails";
+import {
+  addItemToFavourite,
+  saveFavouriteItem,
+} from "../store/slices/favouriteSlice";
 
 const ProductPage = () => {
   const { category, id } = useParams();
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  // const cartItems = useSelector((state) => state.cart.cartItems);
   const showToast = useShowToast();
+  const favouriteItems = useSelector((state) => state.favourite.favouriteItems);
 
   const { product, loading, error } = useGetProductById(
     `/api/products/getProduct/${id}`
@@ -23,10 +27,6 @@ const ProductPage = () => {
     `/api/products/getProducts/category/${category}`
   );
   const { userDetails } = useUserDetails();
-
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
 
   if (loading) {
     return (
@@ -74,7 +74,7 @@ const ProductPage = () => {
 
     dispatch(
       addItemToCart({
-        id: product._id,
+        productId: product._id,
         name: product.name,
         price: product.price,
         img: product.img,
@@ -83,6 +83,29 @@ const ProductPage = () => {
 
     dispatch(saveCartItem(item));
     showToast("Item added to cart successfully");
+  };
+
+  const handleAddToFavourite = () => {
+    const exist = favouriteItems.find((fav) => fav.productId === product._id);
+
+    if (exist) {
+      showToast("Item already exists in favourites");
+      return;
+    }
+
+    const favouriteItem = {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      img: product.img,
+      category: product.category,
+      user: userDetails._id,
+    };
+
+    dispatch(addItemToFavourite(favouriteItem));
+    dispatch(saveFavouriteItem(favouriteItem)).then(() =>
+      showToast("Item added to favourite successfully")
+    );
   };
 
   return (
@@ -109,7 +132,10 @@ const ProductPage = () => {
             <p className="text-base text-gray-600">{product.description}</p>
           </div>
           <div className="flex flex-col md:flex-row gap-2 md:gap-8">
-            <button className="mt-4 flex-1 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+            <button
+              onClick={handleAddToFavourite}
+              className="mt-4 flex-1 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+            >
               Add to favourite
             </button>
             <button
