@@ -14,7 +14,7 @@ export const fetchCartItems = createAsyncThunk(
       if (!res.ok) throw new Error("Failed to fetch cart items");
 
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       return data.reverse();
     } catch (error) {
       return rejectWithValue(error.message);
