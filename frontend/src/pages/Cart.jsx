@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { userDetails, loading, error } = useUserDetails();
+  const { userDetails, loading } = useUserDetails();
   // const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
@@ -25,7 +25,15 @@ const Cart = () => {
       </div>
     );
   }
-  if (error) return <p>Error: {error}</p>;
+  if (!userDetails) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-100">
+        <p className="text-2xl text-blue-300 text-center">
+          Please Login to view cart
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
