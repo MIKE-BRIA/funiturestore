@@ -66,3 +66,31 @@ export async function deleteFavourites(req, res) {
     console.log("Error in deleteFavourites", error);
   }
 }
+
+export async function removeItem(req, res) {
+  try {
+    const { userId, productId } = req.body;
+
+    if (!userId || !productId)
+      return res
+        .status(404)
+        .json({ message: "Product missing from favourites" });
+
+    const product = await Favourite.findOneAndDelete({
+      user: userId,
+      productId,
+    });
+
+    if (!product)
+      return res
+        .status(404)
+        .json({ message: "Product not found in favourites" });
+
+    res
+      .status(200)
+      .json({ message: "Product removed from favourites successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    console.log("error in removeItem from favourite", error);
+  }
+}
