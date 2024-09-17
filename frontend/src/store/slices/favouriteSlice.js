@@ -58,6 +58,27 @@ export const clearAllFavourites = createAsyncThunk(
   }
 );
 
+export const deleteFavourites = createAsyncThunk(
+  "favourites/deleteFavourites",
+  async ({ userId, productId }, { rejectWithValue }) => {
+    try {
+      const res = await fetch(
+        `/api/favourites/removeitem/${userId}/${productId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to clear favourites");
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const favouriteSlice = createSlice({
   name: "favourite",
   initialState,
