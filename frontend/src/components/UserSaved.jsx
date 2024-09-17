@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   clearAllFavourites,
   clearFavourites,
+  deleteFavourites,
   removeItemFromFavourite,
 } from "../store/slices/favouriteSlice";
 import useUserDetails from "../hooks/useUserDetails";
@@ -11,13 +12,14 @@ const UserSaved = () => {
   const favouriteItems = useSelector((state) => state.favourite.favouriteItems);
   const dispatch = useDispatch();
   const { userDetails } = useUserDetails();
+  const userId = userDetails?._id;
 
   function handleRemoveItem(productId) {
     dispatch(removeItemFromFavourite(productId));
+    dispatch(deleteFavourites({ userId, productId }));
   }
 
   function deleteAll() {
-    const userId = userDetails._id;
     dispatch(clearFavourites());
     dispatch(clearAllFavourites(userId));
   }
