@@ -69,7 +69,7 @@ export async function deleteFavourites(req, res) {
 
 export async function removeItem(req, res) {
   try {
-    const { userId, productId } = req.body;
+    const { userId, productId } = req.params;
 
     if (!userId || !productId)
       return res
