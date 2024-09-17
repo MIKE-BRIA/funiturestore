@@ -36,7 +36,7 @@ const UserSaved = () => {
         </button>
       </div>
       {favouriteItems.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 mx-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-4 mx-1 md:mx-4">
           {favouriteItems.map((product) => (
             <div key={product._id} className="relative">
               <Link to={`/shop/${product.category}/${product.productId}`}>
