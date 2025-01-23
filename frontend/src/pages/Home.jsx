@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import RangeCard from "../components/RangeCard";
 import useGetProducts from "../hooks/useGetProduct";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard";
 import Foot from "../components/Foot";
 import { useState } from "react";
 

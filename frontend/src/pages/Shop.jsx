@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import useGetProducts from "../hooks/useGetProduct";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard";
 import { Link } from "react-router-dom";
 
 const SkeletonProductCard = () => (
