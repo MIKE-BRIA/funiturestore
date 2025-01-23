@@ -71,7 +71,7 @@ const RangeCard = ({ title, source }) => {
         {!imageLoaded && (
           <Blurhash
             hash="L9Kd}C-U00_NTx00DjIUD$%N%NIU"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-60 object-cover"
             resolutionX={32}
             resolutionY={32}
             punch={1}
